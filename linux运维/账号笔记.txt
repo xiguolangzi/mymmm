@@ -1,0 +1,33 @@
+****************  1Panel控制面板  **************
+http://192.168.1.44:18500/
+控制面板 密码 huiao 19910129lovesh
+halo 访问账号密码 admin123
+## 查看面板信息
+root:1pctl user-info
+## 修改面板密码
+root:1pctl update password
+
+
+************* 路由器 ************************
+84.78.122.67
+hHhaJY3mDra9
+
+commit 953f229726410c8e4cf7f3401c25520b9016b943 
+
+******* rustDesk 远程 *****************
+后台访问
+http://84.78.122.67:21114/
+账号 admin 19910129
+key:TQdvE38bgApeRrPOCxVdGkjNWmun0GQicbQGRJZbSbY
+
+后台管理账号：admin19910129lovesh
+
+
+************** ico 文件线上处理 *************
+https://favicon.io
+
+******* grok-2 *******
+xai-T7zYnRXDt6hBqg89p7nFrjc8IEVu4JYmTFcCbF96ISG5T4FmvcdjnD555wO8n4xFXqn8bLYYcsMwvzeF
+
+
+
