@@ -1,0 +1,118 @@
+Received: from DBBP189MB1324.EURP189.PROD.OUTLOOK.COM (2603:10a6:10:1eb::22)
+ by PR3P189MB1082.EURP189.PROD.OUTLOOK.COM with HTTPS; Thu, 27 Jul 2023
+ 07:43:17 +0000
+Received: from DUZPR01CA0068.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:3c2::18) by DBBP189MB1324.EURP189.PROD.OUTLOOK.COM
+ (2603:10a6:10:1eb::22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6631.29; Thu, 27 Jul
+ 2023 07:43:15 +0000
+Received: from DB8EUR06FT049.eop-eur06.prod.protection.outlook.com
+ (2603:10a6:10:3c2:cafe::f6) by DUZPR01CA0068.outlook.office365.com
+ (2603:10a6:10:3c2::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6631.29 via Frontend
+ Transport; Thu, 27 Jul 2023 07:43:15 +0000
+Received: from mx1.correo.aeat.es (195.77.198.96) by
+ DB8EUR06FT049.mail.protection.outlook.com (10.233.252.84) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6631.29 via Frontend Transport; Thu, 27 Jul 2023 07:43:15 +0000
+Received: from unknown (HELO wlp050.dit.aeat) ([192.168.7.20])
+  by correoseguro.aeat.es with ESMTP; 27 Jul 2023 09:43:14 +0200
+From: "AgenciaTributaria@correo.aeat.es" <AgenciaTributaria@correo.aeat.es>
+To: =?iso-8859-1?Q?Inspecciones_=B7_TYSA?= <inspecciones@tysaaduanas.com>
+Subject: Certificado ROHS/RAEE emitido para el documento aduanero:
+ 23ES00461131665110
+Thread-Topic: Certificado ROHS/RAEE emitido para el documento aduanero:
+ 23ES00461131665110
+Thread-Index: AQHZwF4BXVreYBybLUST8k8nvFmKkA==
+Date: Thu, 27 Jul 2023 07:43:14 +0000
+Message-ID: <-1664204303.23283.1690443794560@wlp050.dit.aeat>
+Content-Language: es-ES
+X-MS-Exchange-Organization-AuthSource:
+ DB8EUR06FT049.eop-eur06.prod.protection.outlook.com
+X-MS-Has-Attach:
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-MS-Exchange-Organization-Network-Message-Id:
+ f58944dd-49f8-4a9a-ee59-08db8e752316
+X-MS-TNEF-Correlator:
+X-MS-Exchange-Organization-RecordReviewCfmType: 0
+x-ms-publictraffictype: Email
+x-ms-exchange-organization-originalclientipaddress: 195.77.198.96
+x-ms-exchange-organization-originalserveripaddress: 10.233.252.84
+received-spf: Pass (protection.outlook.com: domain of correo.aeat.es
+ designates 195.77.198.96 as permitted sender)
+ receiver=protection.outlook.com; client-ip=195.77.198.96;
+ helo=mx1.correo.aeat.es; pr=C
+authentication-results: spf=pass (sender IP is 195.77.198.96)
+ smtp.mailfrom=correo.aeat.es; dkim=pass (signature was verified)
+ header.d=aeat.es;dmarc=pass action=none
+ header.from=correo.aeat.es;compauth=pass reason=100
+x-eopattributedmessage: 0
+x-eoptenantattributedmessage: e91828f1-4bca-4138-9482-957960f30b51:0
+x-forefront-antispam-report:
+ CIP:195.77.198.96;CTRY:ES;LANG:es;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mx1.correo.aeat.es;PTR:mx1.correo.aeat.es;CAT:NONE;SFS:(13230028)(286005)(451199021)(7696005)(356005)(26005)(9686003)(7636003)(7596003)(450100002)(336012)(7416002)(1096003)(8676002)(34206002)(86362001)(558084003);DIR:INB;
+x-ms-office365-filtering-correlation-id: f58944dd-49f8-4a9a-ee59-08db8e752316
+x-ms-traffictypediagnostic:
+ DB8EUR06FT049:EE_|DBBP189MB1324:EE_|PR3P189MB1082:EE_
+x-microsoft-antispam: BCL:4;
+x-ms-exchange-crosstenant-originalarrivaltime: 27 Jul 2023 07:43:15.2049 (UTC)
+x-ms-exchange-crosstenant-network-message-id:
+ f58944dd-49f8-4a9a-ee59-08db8e752316
+x-ms-exchange-crosstenant-id: e91828f1-4bca-4138-9482-957960f30b51
+x-ms-exchange-crosstenant-fromentityheader: Internet
+x-ms-exchange-transport-crosstenantheadersstamped: DBBP189MB1324
+x-ms-exchange-transport-endtoendlatency: 00:00:02.4587655
+x-ms-exchange-processed-by-bccfoldering: 15.20.6631.026
+dkim-signature: v=1; a=rsa-sha256; c=simple/simple;  d=aeat.es; i=@aeat.es;
+ q=dns/txt; s=aeat;  t=1690443795; x=1721979795;
+  h=date:from:to:message-id:subject:mime-version:   content-transfer-encoding;
+  bh=wtLyNmPqS5lNDQxlvvlFh/c0Znl/71q+n56PhJgOIp4=;
+  b=qqpuE60utGB8icfdldIi31HjUBIb6eupk3C+fdnGZe9Gqfa4LJGwelHh
+   P4hxUGxG945YEIjYSSV22aQsQQPfztwKDSG3fXKX4l4jmF+W+GKndaAs8
+   XM6hzL5kf2XxT/jsZBN/oUson6dXTlo3wAjSsNEzRpNdHLpZdwQIyj4Ne   Y=;
+x-ms-exchange-crosstenant-authas: Anonymous
+x-ms-exchange-crosstenant-authsource:
+ DB8EUR06FT049.eop-eur06.prod.protection.outlook.com
+x-ironport-av: E=Sophos;i="6.01,234,1684792800";    d="scan'208";a="78281914"
+X-Microsoft-Antispam-Mailbox-Delivery:
+ ucf:0;jmr:0;auth:0;dest:I;ENG:(910001)(944506478)(944626604)(920097)(930097);
+X-Microsoft-Antispam-Message-Info:
+ =?iso-8859-1?Q?K5qZ4T0XQYhlgGcplIPgbMvrd7l25iJ3nfTNUiVeZl41iFEYoJLQqE2BSQ?=
+ =?iso-8859-1?Q?y+ZDPV5HQAgkJQjYLIL95jdfpCMRJNaPF54uor/KEwDZ32uq4TBF+AVnfP?=
+ =?iso-8859-1?Q?AQLLaAQqW8y++NrK2Y+hs/Lcn+AUB/Uuc3MWxcyU3ZvlsMtlhTRUtWR0Nu?=
+ =?iso-8859-1?Q?qAIJlQKbwMmW4hjMo4R4o0bjGrbX9qv/nBRWtjkwi/lUqE0kbXMe7gkdRh?=
+ =?iso-8859-1?Q?f69c9edQILTDXNTWR2saub+RuMQEzwW0aGSaUqZheHjduoUEVxjZUUxh6A?=
+ =?iso-8859-1?Q?9WOZJ2aRHIAyjXt+iOaIbXUgvdFkrQCBK9tgebWhUv+rNZAgJzpX/eUKpq?=
+ =?iso-8859-1?Q?7be3/VujI4oav9fws+PeUtjisKHT/6JGOciOKXidm/5F8rNKSqx0DYRI3f?=
+ =?iso-8859-1?Q?uHDhHT33BLXPugWGwbJwLTfTjmBwQjjH1q//sY72Lx97bDpyPo9VuAYH/L?=
+ =?iso-8859-1?Q?nRuAr7YoWGhCIokmllZS27hXFr6X3h776pwrDAVbJv5PpDwmFz3wb7iP9t?=
+ =?iso-8859-1?Q?DeUNtptxPQX8+izmnCWipTYRwtps0wIysNT3hLB7GeqJSdBrVP/E+HAq7f?=
+ =?iso-8859-1?Q?VgTIywwMylb61WjQFi53NNLUlyOETpCbMAwwgyyY0k0I8LwSfu+dFnNeAE?=
+ =?iso-8859-1?Q?znN0Z4Lj/YLLxdQZRYJYKBZRBR3DrYCXU8aO0K0yfB2wq89tMhYa3c40W2?=
+ =?iso-8859-1?Q?WgdgweIhFaGxag0fFLghSMbHTPDxGFoUjVAnTt91Qqu0srgaD/aBmc03dn?=
+ =?iso-8859-1?Q?ezpM1S79DhRxWDjTrGYTgwGeFt4sXMNF2PjHrDefx+tO0jwH5A0Ql9dZgA?=
+ =?iso-8859-1?Q?WSmBoNnS4VND9UAN91MOzuNbH0gy7SU4X0x7HnfSeSHn3Uh4kJQ37O85TK?=
+ =?iso-8859-1?Q?lNcq7ZPVn0EWuBvLl4p1cB8TSgeHdWoeB5yin7mEfala0ZKjQSj0b5brkT?=
+ =?iso-8859-1?Q?rABeyhR2O1h8+RS/da6Q+sfTkK24NK1YNI+dZeK9IuX+3tmOoFBWLfHV+d?=
+ =?iso-8859-1?Q?jo+qUrQlDvH604cKng2mzrR2IY7hPkRTPsubReypuTk4qE6G5L4cu0/xk3?=
+ =?iso-8859-1?Q?0OGlu+Er+7F8xpieSL7i2ebOpZC8L/pdkYmJVDRz5EvYJYXHQr6+qr3eql?=
+ =?iso-8859-1?Q?MPfHO0HGbqPSibJ2E7hXXKz/YPoeC/kjPopSXafO7lS9WN3+jH3WtwOuWk?=
+ =?iso-8859-1?Q?+IVblfg2LXN4O527gh8LTqM1zDcK3RcMbRWYlxSsEKoSBKkb18K5jnJ0qC?=
+ =?iso-8859-1?Q?bhnsV+m/y4j3dg3b1W7DASpTCw+Jal7C8FOGESaSXF4+c6z2UtgRYAYAaV?=
+ =?iso-8859-1?Q?z7iim9vxinH/nLRAefJLiWPCNzX9ZyPNtu5UwnsQAnRJ+Td3mVn71/f5Vr?=
+ =?iso-8859-1?Q?OF1U42TqskzRx/74jOUe5WfsZ3kCjOvLFHuZ2BIsHuXMckwDLmrT8mN6lC?=
+ =?iso-8859-1?Q?lCKrKTGf4KmEgpMpxpHqsYMRstAqAt0CKuCmD4dEJGaM6HFc5W99BS1sEN?=
+ =?iso-8859-1?Q?T8HPe32fDW/Il9ZBIxTSsHcSsR88kBwS30SKXoM0mpzgPXg84/00sS+2k6?=
+ =?iso-8859-1?Q?sStOJai/43cw3mFD1hJrDMKd5LNcJmJfMDcsTTDSzksax1Z9xDzitk9lGh?=
+ =?iso-8859-1?Q?LdgLyixBrzRJLJmqapq1jhIVPDorvil88K?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-ID: <1D086829B991E6468B572A280DC06F78@EURP189.PROD.OUTLOOK.COM>
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+El certificado ESRH460203246523-01 se emite para el n=FAmero de partida: 23=
+ES0046113166511000006
+Medidas ROHS/RAEE  :Certificado Apto
+
+Por favor, no responda a este mensaje. Se trata de un env=EDo automatizado =
+desde una direcci=F3n de correo no atendida.
+
