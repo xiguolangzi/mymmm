@@ -1,0 +1,9 @@
+SEUR - MADRID
+
+Resumen reembolsos liquidados con transferencia el 31/10/23 por la remesa nº 1969270
+
+Remitente                 Fecha Exp. Nº Exp.   Consignatario             Destino SEUR              Reembolso Referencia Cliente  Referencia Cliente 2
+
+UNICO STAR EUROPA ( WS )  20/10/23   6730571   PENGFEI YAO               SAN ANTONIO ABAD          298.56    000229010191581     
+
+                                                                         TOTAL                     298.56 EUR

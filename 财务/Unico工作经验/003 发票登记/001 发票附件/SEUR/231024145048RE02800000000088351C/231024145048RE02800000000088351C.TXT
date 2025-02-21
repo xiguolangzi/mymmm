@@ -1,0 +1,10 @@
+SEUR - MADRID
+
+Resumen reembolsos liquidados con transferencia el 24/10/23 por la remesa nº 1967243
+
+Remitente                 Fecha Exp. Nº Exp.   Consignatario             Destino SEUR              Reembolso Referencia Cliente  Referencia Cliente 2
+
+FUTURE TELECOM PLUS       18/10/23   6554716   CORTECHINO JJZ S.L        ALCORCON                  296.01    000171810170932     
+FUTURE TELECOM PLUS       20/10/23   6730385   EURO BAZAR JIN S.L        MADRID                    318.43    000263710191912     
+
+                                                                         TOTAL                     614.44 EUR

@@ -1,0 +1,9 @@
+SEUR - MADRID
+
+Resumen reembolsos liquidados con transferencia el 19/10/23 por la remesa nº 1966047
+
+Remitente                 Fecha Exp. Nº Exp.   Consignatario             Destino SEUR              Reembolso Referencia Cliente  Referencia Cliente 2
+
+FUTURE TELECOM PLUS       17/10/23   6452990   FU DA 2017 S.L            VITORIA                   707.12    000099110160123     
+
+                                                                         TOTAL                     707.12 EUR

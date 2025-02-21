@@ -1,0 +1,17 @@
+Consultar saldos e movimentos à ordem - 01-08-2023;="0127060717630"
+Nome empresa ;VERMELHIMODERNO UNIPESSOAL,LDA
+NIF ;516700987
+
+Dados da conta 
+Conta ;0127060717630 - EUR - Conta Extracto 
+Saldo contabilístico ;597,35 EUR 
+Saldo disponível ;597,35 EUR 
+
+Dados da consulta 
+Período ;Último mês 
+Intervalo de ;01-07-2023 a 01-08-2023 
+Tipos de movimento ;Todos 
+
+Data mov. ;Data-valor ;Descrição ;Montante ;Saldo contabilístico após movimento ;
+20-07-2023;20-07-2023;TRF LEFEI HUANG ;523,03;597,35;
+01-07-2023;01-07-2023;MANUT CONTA PACOTE CX ;-8,32;74,32;

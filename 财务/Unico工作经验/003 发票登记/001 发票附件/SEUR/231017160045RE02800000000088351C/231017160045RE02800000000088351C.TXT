@@ -1,0 +1,10 @@
+SEUR - MADRID
+
+Resumen reembolsos liquidados con transferencia el 17/10/23 por la remesa nº 1965273
+
+Remitente                 Fecha Exp. Nº Exp.   Consignatario             Destino SEUR              Reembolso Referencia Cliente  Referencia Cliente 2
+
+FUTURE TELECOM PLUS       09/10/23   5876490   PROMA SABIA AKTHER        MADRID                    418.96    000304810062299     
+FUTURE TELECOM PLUS       10/10/23   5956130   KECHU LIN                 VALLADOLID                293.92    000305610102307     
+
+                                                                         TOTAL                     712.88 EUR

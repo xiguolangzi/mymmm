@@ -1,0 +1,22 @@
+Consultar saldos e movimentos à ordem - 02-11-2023;="0127060717630"
+Nome empresa ;VERMELHIMODERNO UNIPESSOAL,LDA
+NIF ;516700987
+
+Dados da conta 
+Conta ;0127060717630 - EUR - Conta Extracto 
+Saldo contabilístico ;1.365,27 EUR 
+Saldo disponível ;1.365,27 EUR 
+
+Dados da consulta 
+Período ;Último mês 
+Intervalo de ;01-10-2023 a 31-10-2023 
+Tipos de movimento ;Todos 
+
+Data mov. ;Data-valor ;Descrição ;Montante ;Saldo contabilístico após movimento ;
+31-10-2023;31-10-2023;TRF FABULAS   DEUSES ;1.300,94;1.365,27;
+31-10-2023;31-10-2023;TRF VERMELHIMODERNO U ;-9.500,00;64,33;
+28-10-2023;28-10-2023;TRF SEREIAS MODERNAS ;1.397,90;9.564,33;
+28-10-2023;28-10-2023;TRF SEREIAS MODERNAS ;860,97;8.166,43;
+14-10-2023;14-10-2023;MANUT CONTA PACOTE CX ;-8,32;7.305,46;
+12-10-2023;12-10-2023;TRF XU ZHENGYI ;1.030,65;7.313,78;
+10-10-2023;10-10-2023;TRF WEIYUE LIU ;789,25;6.283,13;

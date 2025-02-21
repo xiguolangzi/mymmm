@@ -1,0 +1,9 @@
+SEUR - MADRID
+
+Resumen reembolsos liquidados con transferencia el 02/11/23 por la remesa nº 1969760
+
+Remitente                 Fecha Exp. Nº Exp.   Consignatario             Destino SEUR              Reembolso Referencia Cliente  Referencia Cliente 2
+
+FUTURE TELECOM PLUS       30/10/23   7403466   QIAN WU                   TORRELAVEGA               166.53    000119610270367     
+
+                                                                         TOTAL                     166.53 EUR

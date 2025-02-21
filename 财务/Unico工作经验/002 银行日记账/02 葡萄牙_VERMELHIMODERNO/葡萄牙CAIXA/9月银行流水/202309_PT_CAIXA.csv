@@ -1,0 +1,19 @@
+Consultar saldos e movimentos à ordem - 02-10-2023;="0127060717630"
+Nome empresa ;VERMELHIMODERNO UNIPESSOAL,LDA
+NIF ;516700987
+
+Dados da conta 
+Conta ;0127060717630 - EUR - Conta Extracto 
+Saldo contabilístico ;5.493,88 EUR 
+Saldo disponível ;5.493,88 EUR 
+
+Dados da consulta 
+Período ;Último mês 
+Intervalo de ;02-09-2023 a 02-10-2023 
+Tipos de movimento ;Todos 
+
+Data mov. ;Data-valor ;Descrição ;Montante ;Saldo contabilístico após movimento ;
+29-09-2023;29-09-2023;TRF TULIPCAPRICE LDA ;455,48;5.493,88;
+20-09-2023;20-09-2023;TRF LIHUA ZHAO ;5.007,30;5.038,40;
+05-09-2023;05-09-2023;TRF VERMELHIMODERNO U ;-1.850,00;31,10;
+02-09-2023;02-09-2023;MANUT CONTA PACOTE CX ;-8,32;1.881,10;
