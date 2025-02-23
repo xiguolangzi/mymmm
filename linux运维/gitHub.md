@@ -71,8 +71,18 @@ git push --force github main
 
 ## 4 搜索资料技巧
 
-```
+```bash
+https://github.com/trending
+https://github.com/521xueweihan/HelloGitHub
+https://github.com/ruanyf/weekly
 
+# 所有语法
+stars:>100 vue3 ticket printing in:name,description,readme
+# 解释：
+stars:>100：筛选 star 数量大于 100 的项目。
+vue3：筛选与 Vue 3 相关的内容。
+ticket printing：搜索关键词“小票打印”。
+in:name,description,readme：在项目名称、描述或 README 文件中搜索。
 ```
 
 ## 5 工作流程

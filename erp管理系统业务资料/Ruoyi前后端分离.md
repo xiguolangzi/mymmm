@@ -1,80 +1,5 @@
 # 《Ruoyi - 前后端分离》
 
-## 一、环境部署
-
-### 1 环境部署
-
-```java
-// JDK
-
-// Node
-
-// Mysql
-
-// Redis
-
-```
-
-### 2 项目部署
-
-```java
-// 后端代码
-    1 导入基础的数据库表
-    2 修改配置文件： 数据库链接 redis链接
-    3 下载项目依赖
-// 前端代码
-	1 npm install 初始化
-
-// 导入基础的数据库表
-
-```
-
-## 二、 实施使用
-
-### 1 系统管理
-
-#### 1.1 菜单管理
-
-```java
-1.主要对菜单层级 展示位置、状态的 编辑处理功能；
-2.也可以新增菜单；
-```
-
-#### 1.2 数据字典
-
-```java
-1 适用于不经常维护的静态数据； // 比如 性别、状态 等
-2 数据字典表：sys_dict_type 字典类型，sys_dict_data 字典数据，两个表关联字段 "dict_type"
-```
-
-#### 1.3 参数设置
-
-```java
-// 系统参数的设置
-1 是否开启注册
-2 是否开启验证码
-3 验证码的方式
-......
-```
-
-#### 1.4 通知公告
-
-```java
-// 目前只提供了 通知的录入
-对于通知的界面展示 或者 邮件形式发送 需要二次开发！！！
-```
-
-#### 1.5 日志管理
-
-```java
- 1 记录 操作日志
- 2 记录 登录日志
-```
-
-### 2 系统监控
-
-####  2.1 在线用户
-
 #### 2.2 定时任务
 
 ```java
@@ -110,61 +35,6 @@ public class MyTask {
 // 5 有参、无参、多参 的任务传递
 
 // 6 任务定时任务详情、日志记录
-```
-
-### 3 系统工具
-
-#### 3.1 表单构建
-
-```java
-// 1 制作表单 -> 并到处 .vue 文件
-
-// 2 将导出文件 复制到前端工程
-	1 记住组件路径
-// 3 创建动态菜单
-	1 路由地址：菜单层级关系；
-	2 组件路径：组件放置在前端项目的路径；
-```
-
-#### 3.2 代码生成
-
-##### 3.2.1 单表
-
-```
-
-```
-
-##### 3.2.2 树表
-
-```java
-// 1 基本信息
-
-// 2 字段信息
-
-// 3 生成信息
-	1 生成模板：树表
-	2 前端类型：Vue3
-	---- 其他信息
-	3 数编码字段：dept_id
-	4 数父编码字段：parent_id
-	5 数名称字段：dept_name
-```
-
-##### 3.2.3 主子表
-
-```
-
-```
-
-#### 3.3 系统接口 Swagger
-
-```java
-// 1 修改后端代码的配置文件 Swagger请求前缀
-	pathMapping: /
-    修改之后重启后端 -> 前端接口文档就没有请求前缀了！
-// 2 接口文档注解
-    @Api
-    @
 ```
 
 ## 三、项目结构 
@@ -233,10 +103,6 @@ public class MyTask {
 6 ruoyi-system		// 系统模块
 ```
 
-
-
-
-
 ### 2 前端项目结构
 
 #### 2.1 结构划分
@@ -248,8 +114,6 @@ node_modules		// 项目依赖包存储
 src					// 源代码
 	--api
 ```
-
-
 
 ### 3  ruoyi 表结构
 
@@ -1745,6 +1609,10 @@ operateLog === NaN
       return rowData.productCode
     }
   }
+
+// 容易出错的地方：
+	-- ElTooltip 必须配置 default 插槽
+	-- content: getTooltipContent(), 需要绑定函数，不可以是函数名！
 ```
 
 #### 13.4 虚拟表格
@@ -2191,6 +2059,30 @@ const addDetail = () => emit('addPromotionScopeDetail');
 </script>
 ```
 
+#### 13.11 参数校验
+
+```javascript
+// 1 空字符串校验
+if(!str?.trim()){	// 如果 str 为: null、undefined 或 空字符串  -> 返回false -> !取反 = true
+    return false;
+}
+   
+// 2 非空判断
+   if(!data) -> 如果 null、undefined -> 返回false -> !取反 = true
+```
+
+#### 13.12 watchEffect 
+
+```javascript
+// 1 Vue 3 提供了 watchEffect，可以自动收集依赖，避免手动指定 deep: true，提升性能：
+watch(specs, generateCombinations, { deep: true }) // 监听 specs
+-- 更新如下
+watchEffect(() => {generateCombinations();});	// watchEffect 会在 specs 发生变化时自动重新计算
+
+```
+
+
+
 
 
 ### 14 订单序列化
@@ -2418,9 +2310,7 @@ git remote remove origin  # 其中 origin 是远程仓库的名字
 
 ### 21 springBoot3 
 
-#### 21.1 参数校验
-
-##### 21.1.1 类校验
+##### 	21.1. 类校验
 
 ```java
 // 1 在类字段上添加注解
@@ -2458,7 +2348,7 @@ public class UserController {
 
 ```
 
-##### 21.1.2 单个参数校验
+##### 	21.2.  单个参数校验
 
 ```java
 // 1 类上添加注解  @Validated
@@ -2480,7 +2370,7 @@ public class UserController {
 }
 ```
 
-##### 21.1.3 注解 @Validated 与 @Valid 的区别
+##### 	21.3  注解 @Validated 与 @Valid 的区别
 
 ```java
 // @Valid
@@ -2492,7 +2382,7 @@ public class UserController {
 	-- 适用于 @RequestParam、@PathVariable 这些单个参数的校验 ；
 ```
 
-#### 21.2 继承对象赋值
+#### 	21.4  继承对象赋值
 
 ```java
 import org.springframework.beans.BeanUtils;
@@ -2506,6 +2396,39 @@ BeanUtils.copyProperties(salesPromotion, salesPromotionVo);
 ```
 
 
+
+### 22 工作流 Activity
+
+#### 	22.1 前期准备
+
+```bash
+# 1 IDEA 插件
+	-- actiBPM
+	
+# 2 maven包环境引入
+	-- 很多个！
+	
+# 3 activity 配置文件
+	-- 指定路径：resources/activiti.cfg.xml
+	-- 文件名：activiti.cfg.xml
+	-- 配置内容：数据库的链接信息、生成表的策略
+	
+# 4 创建表的测试类
+	-- 通过activiti 创建表
+	-- 很多个配置表！25张
+```
+
+#### 	22.2 整合 SpringBoot3
+
+```bash
+# 1 环境部署
+```
+
+#### 	22.3 业务实现
+
+```
+
+```
 
 
 
