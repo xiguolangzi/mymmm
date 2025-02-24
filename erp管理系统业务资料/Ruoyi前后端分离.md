@@ -1558,6 +1558,18 @@ operateLog === NaN
 -- 解决办法： 修改顶级菜单 productManage
 ```
 
+##### 13.2.2 类型回显不高亮
+
+```bash
+# 问题描述：
+	-- 下拉框、单选、多选 等 使用的是字典值；
+	-- 数据库 类型 char(1)
+	-- 字典值绑定的value类型是字符串；
+	-- 后端正常类型是 string，如果类型给错了，会导致 前端value校验异常！！！
+```
+
+
+
 #### 13.3 h函数
 
 ```js
@@ -2081,7 +2093,16 @@ watchEffect(() => {generateCombinations();});	// watchEffect 会在 specs 发生
 
 ```
 
+#### 13.13 点击名称展示图片
 
+```vue
+<el-popover trigger="hover" placement="top">
+    <image-preview :src="scope.row.comboImage" :width="60" :height="60" />
+    <template #reference>
+    	<el-link type="primary" :underline="false">{{ scope.row.comboName }}</el-link>
+    </template>
+</el-popover>
+```
 
 
 
@@ -2310,7 +2331,9 @@ git remote remove origin  # 其中 origin 是远程仓库的名字
 
 ### 21 springBoot3 
 
-##### 	21.1. 类校验
+#### 21.1 参数校验
+
+##### 		21.1.1 类校验
 
 ```java
 // 1 在类字段上添加注解
@@ -2348,7 +2371,7 @@ public class UserController {
 
 ```
 
-##### 	21.2.  单个参数校验
+##### 		21.1.2  单个参数校验
 
 ```java
 // 1 类上添加注解  @Validated
@@ -2370,7 +2393,7 @@ public class UserController {
 }
 ```
 
-##### 	21.3  注解 @Validated 与 @Valid 的区别
+##### 		21..13  注解 @Validated 与 @Valid 的区别
 
 ```java
 // @Valid
@@ -2382,7 +2405,7 @@ public class UserController {
 	-- 适用于 @RequestParam、@PathVariable 这些单个参数的校验 ；
 ```
 
-#### 	21.4  继承对象赋值
+#### 	21.2  继承对象之间copy赋值
 
 ```java
 import org.springframework.beans.BeanUtils;
@@ -2393,6 +2416,21 @@ SalesPromotion salesPromotion = salesPromotionService.getSalesPromotionById(prom
 SalesPromotionVo salesPromotionVo = new SalesPromotionVo();
 // 使用 BeanUtils 复制属性
 BeanUtils.copyProperties(salesPromotion, salesPromotionVo);
+```
+
+#### 21.3 `BigDecimal` 类型的计算
+
+```java
+// 0 BigDecimal  是不可变的类型
+
+// 1 累计求和 .reduce(初始值 0)
+BigDecimal totalQuantity =list.stream()
+    .map(GoodsReceiptsDetails::getReceivedQuantity)
+    .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+// 2 取反 10 取反 -10
+totalQuantity.negate()
+
 ```
 
 
@@ -2504,7 +2542,11 @@ BeanUtils.copyProperties(salesPromotion, salesPromotionVo);
 #### 	1.4 controller
 
 ```bash
-
+"@element-plus/icons-vue": "2.3.1",
+"element-plus": "^2.9.5",
+"pinia": "2.3.0",
+"pinia-plugin-persistedstate": "^4.2.0",
+"vue-i18n": "^10.0.1",
 ```
 
 #### 	1.5 service
