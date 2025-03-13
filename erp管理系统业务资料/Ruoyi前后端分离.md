@@ -2104,6 +2104,352 @@ watchEffect(() => {generateCombinations();});	// watchEffect 会在 specs 发生
 </el-popover>
 ```
 
+#### 13.14 分页栏在最底部
+
+```css
+.app-container {
+  height: 100%; /* 确保父容器高度充满 */
+  display: flex;
+  flex-direction: column;
+}
+
+.table-container {
+  flex-grow: 1; /* 表格区域充满剩余空间 */
+  display: flex;
+  flex-direction: column;
+}
+
+.el-table {
+  flex-grow: 1; /* 表格充满剩余空间 */
+}
+
+.pagination {
+  flex-shrink: 0; /* 分页栏固定在底部 */
+  margin-top: auto; /* 将分页栏推到容器底部 */
+}
+
+
+```
+
+#### 13.15 LuckySheet 表格处理
+
+```bash
+# 1 使用参考链接：
+--https://blog.csdn.net/m0_59415345/article/details/136963918
+
+# 2 安装环境
+	-- npm 方式安装需要安装 jquery,避免环境冲突 放弃；
+	-- 打包方式安装：
+		-- git上clone一份
+		-- npm install npm install gulp -g   下载以来
+		-- npm run dev 查看环境是否可以运行
+		-- npm run build 打包
+		-- 将打包的dish目录，放到 /public/下，删除 dish中的index.html文件
+# 3 vue3 环境中引入样式
+	-- index.html 引入依赖 css、js 等
+	
+# 4 创建使用
+
+```
+
+#### 13.16 Univer 表格处理
+
+```bash
+# 1 使用参考链接：
+--https://blog.csdn.net/m0_59415345/article/details/136749058?spm=1001.2014.3001.5501
+```
+
+#### 13.17 Vtable 表格处理
+
+```js
+// 1 安装依赖
+npm install @visactor/vtable @visactor/vtable-editors
+
+// 2 使用
+<ListTable  
+    ref="listTableRef"
+    :options="tableOptions" 
+    class="vtable-container" 
+    @contextmenu="handleContextMenu" 
+    @onSelectedCell="handleCellClick"
+>
+    <ListColumn v-for="(column, index) in columns" :key="index" :field="column.field" 
+        :title="column.title" 
+        :headerStyle="column.headerStyle"
+        :style="column.style"
+        :width="column.width" 
+        :minWidth="column.minWidth"
+        :maxWidth="column.maxWidth"
+        :editor="column.editor" 
+        :sort="column.sort" 
+        :cellType="column.cellType" 
+        :barType="column.barType"  
+        :min="column.min"
+        :max="column.max"
+        :dependField="column.dependField"
+        :select="column.select"
+        :format="column.format"
+        :dragHeader="column.dragHeader"
+    />
+    <Tooltip :isShowOverflowTextTooltip="true" />
+</ListTable>
+
+// 3 配置
+import { ListTable, ListColumn, VTable, Tooltip} from '@visactor/vue-vtable';
+import { DateInputEditor, InputEditor, ListEditor, TextAreaEditor } from '@visactor/vtable-editors';
+import { registerTheme } from 'echarts';
+
+// 创建编辑器实例
+const inputEditor = new InputEditor();
+const textAreaEditor = new TextAreaEditor();
+const dateInputEditor = new DateInputEditor();
+const listEditor = new ListEditor({ values: ['女', '男'] });
+const listEditor2 = new ListEditor({ values: ['启用', '禁用'] });
+
+// 注册编辑器到VTable
+VTable.register.editor('number', inputEditor);
+VTable.register.editor('textArea', textAreaEditor);
+VTable.register.editor('date', dateInputEditor);
+VTable.register.editor('select', listEditor);
+VTable.register.editor('select2', listEditor2);
+
+// 表格数据
+const tableRecords = ref([{
+  name: '张三',
+  age: 18,
+  sex: '男',
+  hobby: '🏀',
+  email: '@example',
+  button: 'select',
+  id: '12345678901',
+  status: '正常',
+  price: 100,
+  total: 900,
+  index: 1,
+}, {
+  name: '李四',
+  age: 19,
+  sex: '男',
+  hobby: '🏀',
+  email: '@example',
+  button: 'select',
+  id: '12345678901',
+  status: '正常',
+  price: 100,
+  total: 500,
+  index: 2,
+}, {
+  name: '王五',
+  age: 20,
+  sex: '男',
+  hobby: '🏀',
+  email: '@example',
+  button: 'select',
+  id: '12345678901',
+  status: '正常',
+  price: 100,
+  total: 10,
+  index: 2,
+}, {
+  name: '赵六',
+  age: 21,
+  sex: '男',
+  hobby: '🏀',
+  email: '@example',
+  button: 'select',
+  id: '12345678901',
+  status: '正常',
+  price: 100,
+  total: -200,
+  index: 3,
+},
+]);
+
+const columns = ref([
+  { 
+    field: 'index', 
+    title: '序号', 
+    width: 70,
+    headerStyle: {
+      bgColor: 'red',
+      autoWrapText: true,
+      lineHeight: 20,
+      lineClamp: 'auto',
+      textBaseline: "top",
+      color:"yellow"
+    },
+    style: {
+      cursor: 'pointer',
+      lineThrough: true,
+      textBaseline:"center",
+      textAlign: "center",
+      marked: true,
+    },
+    select: {
+      highlightMode: 'row'  // 可以配置为'cross' 或者 'row' 或者 'column'
+    },
+    dragHeader: false,  // 是否允许拖拽调整列宽
+  },
+  { 
+    field: 'name', title: '名字', cellType: 'link', style: { color: 'red' }, width: 100 ,
+    templateLink: 'https://www.google.com.hk/search?q={name}',
+    headerStyle: {
+      bgColor: 'red',
+      autoWrapText: true,
+      lineClamp: 'auto',
+      textBaseline: "top",
+      color: 'blue',
+    },
+  },
+
+  { 
+    field: 'age', title: '年龄', editor: 'number', width: 200, 
+    sort: (v1, v2, order) => {
+      if (order === 'desc') {
+        return v1 === v2 ? 0 : v1 > v2 ? -1 : 1;
+      }
+      return v1 === v2 ? 0 : v1 > v2 ? 1 : -1;
+    },
+    format: (value) => {
+      if (value) return '$' + Number(value).toFixed(2);
+      return '--';
+    },
+  },
+  { 
+    field: 'sex', title: '性别', editor: 'select', selectOptions: ['男', '女'] 
+  },
+  { 
+    field: 'hobby', title: '爱好' 
+  },
+  { 
+    field: 'email', title: '邮箱', editor: 'textArea' ,style: { color: 'red' }
+  },
+  { 
+    field: 'phone', title: 'IP地址', editor: 'date' 
+  },
+  { 
+    field: 'button', title: '手机号',cellType: 'button', text: 'Select' 
+  },
+  { 
+    field: 'status', title: '状态', editor: 'select2', selectOptions: ['正常', '禁用'] 
+  },
+  { 
+    field: 'total', title: '销售数量',width: 200, cellType: 'progressbar', min: 0,max: 1000,barType: 'negative',dependField: '8',
+    style: {
+      padding: [16, 28, 16, 28],
+      color(args) {
+        if (args.dataValue >= 0) return 'black';
+        return 'red';
+      }
+    }
+  },
+  { 
+    field: '9', title: '操作', cellType: 'text', width: 200, cellRenderer: CustomCellRenderer
+  }
+
+]);
+
+
+const tableOptions = ref({
+  records: tableRecords.value.map((row, index) => ({ index: index + 1, ...row })),
+  dragHeaderMode:'all',    //拖拽表头
+  enableLineBreak: true,  // 自动换行
+  autoWrapText: false,     // 自动换行
+  heightMode: 'autoHeight',
+  editCellTrigger: 'click', // 单击触发单元格编辑
+  keyboardOptions: {
+    copySelected: true,
+    pasteValueToCell: true,
+    selectAllOnCtrlA: true
+  },
+  tableOptions: {
+    widthMode: 'fixed', // 设置为 fixed 或其他合适的模式
+  },
+  theme: {
+    underlayBackgroudColor: { // 画布空白区域
+      bgColor:'rgba(0, 123, 255, 0.2)'
+    }, 
+    frameStyle: { // 表格边框样式
+      borderColor: 'purple', // 边框颜色
+      borderLineWidth: 2    // 边框宽度
+    },
+    headerStyle: {  // 列表头样式
+      columns: 20,
+      rows: 50,
+    },
+    rowHeaderStyle: { // 行头样式
+      bgColor: '#pink',
+      color: 'blue'
+    },
+    cornerHerderStyle: {  // 角头样式
+      bgColor: '#pink',
+      color: 'blue'
+    },
+    bodyStyle: {
+      bgColor: '#ffffff', // 背景颜色
+      color: '#333333' // 文字颜色
+    },
+    scrollStyle: {  // 滚动条样式
+      bgColor: '#ffffff', // 背景颜色
+      color: '#333333' // 文字颜色
+    },
+    selectionStyle: {
+      cellBorderLineWidth: 2,
+      cellBorderColor: '#9900ff',
+      cellBgColor: 'rgba(153,0,255,0.2)',
+    },
+    select: {
+      highlightMode: 'cross'  // 可以配置为'cross' 或者 'row' 或者 'column'
+    },
+    dragHeaderSplitLine: {  // 拖拽表头分割线样式
+      lineColor: 'red',
+      lineWidth: 2,
+      shadowBlockColor: 'rgba(255,0,0,0.3)'
+    }
+  },
+  enableEdit: true,  // 启用编辑功能
+  enableSort: true,  // 启用排序功能
+  enableSelection: true, // 启用选择功能
+  selectionMode: 'cell', // 单元格选择模式
+  selectionUnit: 'cell', // 单元格选择单元
+  selectionStyle: {
+    backgroundColor: 'rgba(0, 123, 255, 0.2)' // 选中单元格背景颜色
+  }
+});
+```
+
+#### 13.18 全屏组件不展示
+
+```bash
+# 1 el-select 添加配置：
+	--:teleported='false' 
+	
+# 2 其他组件：
+	-- append-to-body 默认是false,没有挂载到body上，正常全屏会展示；
+	-- append-to 还可以通过这个属性，将组件挂载到全屏的div上
+	
+# 3 消息提示
+	ElNotification({
+        title: 'Info',
+        message: '你确定你想关闭吗',
+        type: 'info',
+        position: 'bottom-right',
+        # appendTo 挂载到 全屏组件上
+        appendTo: cashierContainer.value
+      })
+# 4 消息确认
+	# appendTo 挂载到 全屏组件上
+	ElMessageBox.confirm('你确定你想关闭吗?','info'{type:'warning',appendTo:cashierContainer.value})
+    .then(() => {
+      drawer.value = false;
+    })
+    .catch(() => {
+      // catch error
+    })
+```
+
+
+
 
 
 ### 14 订单序列化
@@ -2470,6 +2816,264 @@ totalQuantity.negate()
 
 
 
+### 23 indexedDB 使用
+
+#### 	23.1 封装
+
+```
+import { dbConfig } from './dbConfig';
+
+class IndexedDBUtil {
+  /**
+   * 1. 打开或创建数据库
+   * @param {string} dbName 数据库名称
+   * @returns {Promise<IDBDatabase>}
+   */
+  static openDB(dbName) {
+    const dbObject = dbConfig.find((db) => db.dbName == dbName);
+    if (!dbObject) {
+      return Promise.reject(new Error(`数据库配置未找到: ${dbName}`));
+    }
+
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open(dbObject.dbName, dbObject.version);
+
+      request.onupgradeneeded = (event) => {
+        const db = event.target.result;
+        console.log(`初始化数据库 '${dbObject.dbName}' 需要升级, 旧版本: ${event.oldVersion}, 新版本: ${event.newVersion}`);
+
+        dbObject.storeNameList.forEach(({ storeName, options, indexList }) => {
+          if (!db.objectStoreNames.contains(storeName)) {
+            const store = db.createObjectStore(storeName, options);
+            if (indexList) {
+              indexList.forEach(({ name, keyPath, options }) => {
+                store.createIndex(name, keyPath, options);
+              });
+            }
+          }
+        });
+      };
+
+      request.onsuccess = () => {
+        const db = request.result;
+        db.onversionchange = () => {
+          db.close();
+          console.log('数据库连接已关闭，等待升级');
+        };
+        console.log('数据库打开成功:', dbObject.dbName);
+        resolve(db);
+      };
+
+      request.onerror = () => reject(new Error(`数据库打开失败: ${request.error?.message}`));
+      request.onblocked = () => reject(new Error('数据库连接被阻止，请关闭其他窗口或刷新页面'));
+    });
+  }
+
+  /**
+   * 2. 使用事务管理优化
+   * @param {string} dbName
+   * @param {string} storeName
+   * @param {'readonly'|'readwrite'} mode
+   * @param {(store: IDBObjectStore) => any} callback
+   * @returns {Promise<any>}
+   */
+  static async withTransaction(dbName, storeName, mode, callback) {
+    const db = await this.openDB(dbName);
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(storeName, mode);
+      const store = transaction.objectStore(storeName);
+
+      const result = callback(store); // 允许 callback 返回结果
+      transaction.oncomplete = () => resolve(result);
+      transaction.onerror = () => reject(new Error(`事务失败: ${transaction.error?.message}`));
+    });
+  }
+
+  /**
+   * 3. 统一封装 IndexedDB 请求
+   * @param {IDBRequest} request
+   * @returns {Promise<any>}
+   */
+  static handleRequest(request) {
+    return new Promise((resolve, reject) => {
+      request.onsuccess = () => resolve(request.result ?? null); // 兼容 undefined
+      request.onerror = () => reject(new Error(`IndexedDB Error: ${request.error?.message}`));
+    });
+  }
+
+  /**
+   * 4. 添加或更新数据
+   * @param {string} dbName
+   * @param {string} storeName
+   * @param {Object} data
+   * @returns {Promise<void>}
+   */
+  static async saveData(dbName, storeName, data) {
+    console.log("save存储的数据是：", data)
+    return this.withTransaction(dbName, storeName, 'readwrite', (store) => store.put(data));
+  }
+
+  /**
+   * 5. 获取单条数据
+   * @param {string} dbName
+   * @param {string} storeName
+   * @param {string|number} id
+   * @returns {Promise<Object|null>}
+   */
+  static async getData(dbName, storeName, id) {
+    const db = await this.openDB(dbName);
+    const transaction = db.transaction(storeName, 'readonly');
+    return this.handleRequest(transaction.objectStore(storeName).get(id));
+  }
+
+  /**
+   * 6. 通过索引获取单条数据
+   * @param {string} dbName
+   * @param {string} storeName
+   * @param {string} indexName
+   * @param {any} value
+   * @returns {Promise<Object|null>}
+   */
+  static async getDataByIndex(dbName, storeName, indexName, value) {
+    const db = await this.openDB(dbName);
+    const transaction = db.transaction(storeName, 'readonly');
+    const index = transaction.objectStore(storeName).index(indexName);
+    return this.handleRequest(index.get(value));
+  }
+
+  /**
+   * 7. 通过索引获取多条数据
+   * @param {string} dbName
+   * @param {string} storeName
+   * @param {string} indexName
+   * @param {any} value
+   * @returns {Promise<Array>}
+   */
+  static async getAllDataByIndex(dbName, storeName, indexName, value) {
+    const db = await this.openDB(dbName);
+    const transaction = db.transaction(storeName, 'readonly');
+    const index = transaction.objectStore(storeName).index(indexName);
+    return this.handleRequest(index.getAll(value));
+  }
+
+  /**
+   * 8. 获取所有数据
+   * @param {string} dbName
+   * @param {string} storeName
+   * @returns {Promise<Array>}
+   */
+  static async getAllData(dbName, storeName) {
+    const db = await this.openDB(dbName);
+    const transaction = db.transaction(storeName, 'readonly');
+    return this.handleRequest(transaction.objectStore(storeName).getAll());
+  }
+
+  /**
+   * 9. 删除单条数据 (重命名为 removeData)
+   * @param {string} dbName
+   * @param {string} storeName
+   * @param {string|number} id
+   * @returns {Promise<void>}
+   */
+  static async removeData(dbName, storeName, id) {
+    return this.withTransaction(dbName, storeName, 'readwrite', (store) => store.delete(id));
+  }
+
+
+  /**
+   * 10. 清空整个存储 (deleteData 作为 clearStore 的别名)
+   * @param {string} dbName
+   * @param {string} storeName
+   * @returns {Promise<void>}
+   */
+  static async clearStore(dbName, storeName) {
+    return this.withTransaction(dbName, storeName, 'readwrite', (store) => store.clear());
+  }
+
+  static async deleteData(dbName, storeName) {
+    return this.clearStore(dbName, storeName);
+  }
+}
+
+export default IndexedDBUtil;
+
+```
+
+#### 	23.2 配置
+
+```javascript
+// 配置库 ConfigDB
+export const ConfigDB = {
+  dbName: 'configDB',	// 1 数据库名称
+  version: 1,			// 2 版本号(会触发升级)
+  storeNameList: [
+    {
+      storeName: 'lockScreenConfig',	// 3 存储对象（表）
+      options: {	// 4 options 表的配置（如主键）
+        keyPath: 'id',
+        autoIncrement: true
+      },
+      indexList: [	// 5 表的索引信息
+        {
+          name: 'password',	// 6 索引名
+          keyPath: 'password',	// 7 索引字段
+          options: {
+            unique: false	// 8 是否不可重复
+          }
+        }
+      ]
+    },
+    {
+      storeName: 'fingerprint',
+      options: {
+        keyPath: 'id',
+      }
+    },
+  ]
+}
+```
+
+#### 	23.3 使用
+
+```javascript
+// 1 数据库/表结构 配置
+import { dbConfig } from '@/indexedDB/dbConfig';
+// 2 封装的 数据库操作工具
+import IndexedDBUtil from '@/indexedDB/index.js'
+
+// 3 必要字段
+const DB_NAME = "configDB";
+const STORE_NAME = "fingerprint";
+const idStr = "device_fingerprint"
+
+// 4 先判断 DB_NAME 和 STORE_NAME 是否存加入配置
+const dbObject = dbConfig.find((db) => db.dbName === DB_NAME);
+if (!dbObject) {
+  throw new Error(`❌ 未找到数据库 '${DB_NAME}' 的配置`);
+} else {
+  if (!dbObject.storeNameList.find((store) => store.storeName === STORE_NAME)) {
+    throw new Error(`❌ 未找到数据库 '${DB_NAME}' 中的存储 '${STORE_NAME}' 的配置`);
+  }
+}
+
+// 5 使用 await 调用方法
+const deleteFingerprintFromDB = async () => {
+  try {
+    await IndexedDBUtil.removeData(DB_NAME, STORE_NAME, idStr);
+    console.log("设备指纹删除成功");
+    return true;
+  } catch (error) {
+    console.error("删除设备指纹失败:", error);
+    return false;
+  }
+};
+
+```
+
+
+
+
+
 ## 八 业务规范
 
 ### 1 springBoot3
@@ -2486,7 +3090,7 @@ totalQuantity.negate()
 	-- update_by
 	-- remark
 	-- tenant_id
-	-- del_flag	必须设置默认值 '0'
+	-- del_flag	必须设置默认值 '0' tinyint Integer
 # 2 检查唯一性写法 
 	<select id="checkCodeUnique" resultType="java.lang.Boolean">
         SELECT EXISTS(
@@ -2505,6 +3109,7 @@ totalQuantity.negate()
 	金额/数量：BigDecimal 10,3
 	单价：BigDecimal 10,2
 	百分数：BigDecimal 5,2
+	所有char(1) 改成 intyint 类型 java中Integer
 ```
 
 #### 	1.3 实体类
@@ -2576,6 +3181,7 @@ totalQuantity.negate()
 # 4 修改：
 	-- 4.1 不需要 tenant条件，因为修改之前已经校验了租户信息！
 	-- 4.2 不需要 校验删除状态，为了后续回复删除的数据！
+# 5 尽可能不要使用 or 的语法
 ```
 
 #### 1.7 方法/参数
@@ -2594,9 +3200,50 @@ totalQuantity.negate()
 
 ### 2 vue3
 
+#### 	2.1 el-input 只允许输入数字
+
+```vue
+<!-- inputmode="numeric"可以调用移动端的数字按钮， @keypress="onlyNumber"控制输入 -->
+<el-input v-model="form.comboCode" placeholder="请输入套餐条码" type="text" inputmode="numeric" maxlength="20" show-word-limit :rows="1" @keypress="onlyNumber"/>
+
+function onlyNumber(event) {
+  if (!/^\d$/.test(event.key)) {
+    event.preventDefault();
+  }
+}
+```
+
+
+
 ### 3 element-plus
 
 ### 4 mysql
+
+#### 	4.1 添加索引
+
+```sql
+-- 1 单索引
+ALTER TABLE erp_customer ADD INDEX idx_invoice_phone (invoice_phone);
+ALTER TABLE erp_customer ADD INDEX idx_invoice_tax (invoice_tax);
+ALTER TABLE erp_customer ADD INDEX idx_del_tax (del_flag);
+ALTER TABLE erp_customer ADD INDEX idx_contact_email (contact_email);
+ALTER TABLE erp_customer ADD INDEX idx_tenant_id (tenant_id);
+ALTER TABLE erp_customer ADD INDEX idx_category_id (category_id);
+ALTER TABLE erp_customer ADD INDEX idx_salesman_id (salesman_id);
+ALTER TABLE erp_customer ADD INDEX idx_level_id (level_id);
+
+-- 2 组合索引
+CREATE INDEX idx_cajaId_status ON erp_sales_shift_records (caja_id,shift_status)
+```
+
+#### 	4.3 批量插入
+
+```sql
+-- 批量插入
+
+```
+
+
 
 ### 5 mybatis
 
