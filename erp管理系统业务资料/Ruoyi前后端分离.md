@@ -2448,7 +2448,45 @@ const tableOptions = ref({
     })
 ```
 
+#### 	13.19 雪花算法的使用：
 
+```javascript
+// 1 封装了雪花算法 "@/util/SnowflakeID"
+// 2 使用雪花封装class
+import SnowflakeID from './SnowflakeID';
+
+// 使用 cajaId 初始化
+const cajaId = 95612; // 收银台 ID
+const dataCenterId = 1; // 数据中心 ID
+const snowflake = new SnowflakeID({ cajaId, dataCenterId });
+
+// 生成唯一 ID
+const id = snowflake.nextId();
+console.log('生成的序号:', id);
+```
+
+#### 13.20 页面缓存
+
+```bash
+# 1 首先必须要有权限，如果没有绑定权限 缓存会失效
+# 2 name 和 组件名称要一样；
+# 3 name 必须唯一，否则会遍历内存溢出！
+{
+    path: '/cashier',
+    component: Layout,
+    hidden: true,
+    permissions: ['sales:cashier:edit'],
+    children: [
+      {
+        path: '/cashier/cashOperation',
+        component: () => import('@/views/sales/salesOrder/cashOperation'),
+        name: 'cashOperation',
+        meta: { title: '收银台' }
+      }
+    ]
+  },
+
+```
 
 
 
@@ -3196,6 +3234,84 @@ const deleteFingerprintFromDB = async () => {
 
 ```
 
+#### 1.8 数据类型 判断/对比
+
+```java
+// 1 判断非空列表
+if(Objects.isNull(salesOrderDetails) || salesOrderDetails.isEmpty())
+{
+    throw new Exception("......")
+}
+// 2 Integer 类型比较 （比较直可以是null）
+Objects.equals(paramsA,paramsB)
+```
+
+#### 1.9 列表汇总统计
+
+```java
+/**
+     * 汇总订单明细
+     * @param salesOrderDetails 订单明细列表
+     */
+    private void summarizeOrderDetails(List<SalesOrderDetail> salesOrderDetails) {
+        if (salesOrderDetails == null || salesOrderDetails.isEmpty()) {
+            log.warn("订单明细为空，跳过汇总处理");
+            return;
+        }
+
+        // **使用 record 作为 Key，减少 String 拼接**
+        record OrderDetailKey(Integer detailType, Long detailMainSkuId, Long skuId, String batchNo, String detailSn,
+                              BigDecimal detailPrice, BigDecimal detailDiscountRate, Long promotionId, Integer isGift) {}
+
+        // **并行流处理，提高大数据量下的汇总性能**
+        Map<OrderDetailKey, SalesOrderDetail> summarizedMap = salesOrderDetails.parallelStream()
+            .collect(Collectors.toMap(
+                detail -> new OrderDetailKey(
+                    detail.getDetailType(),
+                    detail.getDetailMainSkuId(),
+                    detail.getSkuId(),
+                    detail.getBatchNo(),
+                    detail.getDetailSn(),
+                    safeValue(detail.getDetailPrice()),
+                    safeValue(detail.getDetailDiscountRate()),
+                    detail.getPromotionId(),
+                    detail.getIsGift()
+                ),
+                detail -> detail,
+                (existing, incoming) -> {
+                    // **合并相同 key 的订单明细**
+                    existing.setDetailQuantity(existing.getDetailQuantity().add(safeValue(incoming.getDetailQuantity())));
+                    existing.setDetailAmount(existing.getDetailAmount().add(safeValue(incoming.getDetailAmount())).setScale(2, RoundingMode.HALF_UP));
+                    existing.setDetailDiscountAmount(existing.getDetailDiscountAmount().add(safeValue(incoming.getDetailDiscountAmount())).setScale(2, RoundingMode.HALF_UP));
+                    existing.setDetailSalesAmount(existing.getDetailSalesAmount().add(safeValue(incoming.getDetailSalesAmount())).setScale(2, RoundingMode.HALF_UP));
+                    existing.setDetailBaseAmount(existing.getDetailBaseAmount().add(safeValue(incoming.getDetailBaseAmount())).setScale(2, RoundingMode.HALF_UP));
+                    existing.setDetailTaxAmount(existing.getDetailTaxAmount().add(safeValue(incoming.getDetailTaxAmount())).setScale(2, RoundingMode.HALF_UP));
+                    existing.setDetailNetAmount(existing.getDetailNetAmount().add(safeValue(incoming.getDetailNetAmount())).setScale(2, RoundingMode.HALF_UP));
+                    return existing;
+                }
+            ));
+
+
+        // 更新订单明细
+        salesOrderDetails.clear();
+        salesOrderDetails.addAll(summarizedMap.values());
+
+        log.info("订单明细汇总完成，汇总后明细数: {}", salesOrderDetails.size());
+    }
+
+```
+
+#### 1.10 唯一key 拼接
+
+```
+// **使用 record 作为 Key，减少 String 拼接**
+record OrderDetailKey(
+	Integer detailType, Long detailMainSkuId, Long skuId, String batchNo, String detailSn,
+     BigDecimal detailPrice, BigDecimal detailDiscountRate, Long promotionId, Integer isGift
+) {}
+
+```
+
 
 
 ### 2 vue3
@@ -3236,11 +3352,27 @@ ALTER TABLE erp_customer ADD INDEX idx_level_id (level_id);
 CREATE INDEX idx_cajaId_status ON erp_sales_shift_records (caja_id,shift_status)
 ```
 
-#### 	4.3 批量插入
+#### 	4.2 批量插入
 
 ```sql
 -- 批量插入
 
+```
+
+#### 4.3 批量更新
+
+```xml
+<!-- 批量更新凭证状态 -->
+<update id="batchUpdateVoucherStatusByVoucherList">
+    UPDATE erp_finance_voucher v
+    JOIN (
+        <foreach collection="voucherList" item="voucher" separator="UNION ALL">
+          SELECT #{voucher.voucherId} AS vid, #{voucher.voucherStatus} AS vstatus
+        </foreach>
+     ) t ON v.voucher_id = t.vid
+     SET v.voucher_status = t.vstatus
+</update>
+<!-- 优点 MySQL下性能极佳 语法清晰-->
 ```
 
 
