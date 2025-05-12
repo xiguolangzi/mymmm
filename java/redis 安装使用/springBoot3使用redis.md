@@ -984,7 +984,9 @@ public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory, 
             .entryTtl(Duration.ofMinutes(30))
             .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
             .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new FastJson2JsonRedisSerializer<>(Object.class)))
-            .disableCachingNullValues();
+            .disableCachingNullValues()
+      			// 自定义前缀（去掉默认 ::）
+            .computePrefixWith(cacheName -> cacheName + ":"); // 或者 return "" 表示不加分隔
 
     // 构建每个 cacheName 对应的配置
     Map<String, RedisCacheConfiguration> configMap = new HashMap<>();
