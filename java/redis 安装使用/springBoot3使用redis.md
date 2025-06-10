@@ -1019,3 +1019,135 @@ public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory, 
 
 ```
 
+
+
+## 三 项目实战应用
+
+### 	1 需求
+
+```java
+1 多租户
+2 商品缓存
+3 关键字过滤商品(商品名称模糊查询，商品编码精确查询)
+```
+
+### 	2 查询所有商品并缓存
+
+```java
+@Service
+@RequiredArgsConstructor
+public class ProductSkuCache {
+
+    private final ProductSkuMapper productSkuMapper;
+
+    /**
+     * 获取所有SKU
+     * @param tenantId
+     * @return
+     */
+    @Cacheable(value = "skuListCache", key = "'tenant_' + #tenantId")
+    public List<ProductSkuVo> getAllProductSkuByTenant(Long tenantId) {
+        ProductSku query = new ProductSku();
+        query.setTenantId(tenantId);
+        return productSkuMapper.selectProductSkuList(query);
+    }
+}
+```
+
+### 	3 封装 增/删/改 预热刷新缓存
+
+```java
+@Service
+@RequiredArgsConstructor
+@Slf4j
+public class ProductSkuCacheManager {
+
+    private final RedisTemplate redisTemplate;
+    private final ProductSkuCache productSkuCache;
+
+    /**
+     * 根据租户ID清除缓存
+     * @param tenantId
+     */
+    public void clearCacheByTenantId(Long tenantId) {
+        String cacheKey = "skuListCache:tenant_" + tenantId;
+        redisTemplate.delete(cacheKey);
+    }
+
+    /**
+     * 根据租户ID 热更新缓存
+     * @param tenantId
+     */
+    public void refreshCacheByTenant(Long tenantId) {
+        if (tenantId == null){
+            return;
+        }
+        clearCacheByTenantId(tenantId);
+        // 触发缓存预热
+        productSkuCache.getAllProductSkuByTenant(tenantId);
+    }
+}
+```
+
+### 	3 处理 增/删/改 刷新缓存
+
+```java
+// 举例 新增
+
+@Service
+@RequiredArgsConstructor
+@Slf4j
+public class ProductSkuServiceImpl implements IProductSkuService 
+{
+
+    private final ProductSkuMapper productSkuMapper;
+    private final ProductSkuCacheManager productSkuCacheManager;
+
+		@Override
+    @TenantId(tableAlias = "k")
+    public int insertProductSku(ProductSku productSku)
+    {
+        // 1 检查 SKU编码的唯一性
+        checkSkuCodeUnique(productSku);
+        int res =  productSkuMapper.insertProductSku(productSku);
+        if (res > 0){
+        		// 刷新缓存
+            productSkuCacheManager.refreshCacheByTenant(productSku.getTenantId());
+        }
+        return res;
+    }
+}
+```
+
+### 	4 关键字查询数据
+
+```java
+@PreAuthorize("@ss.hasPermi('product:sku:list')")
+@GetMapping("/suggest")
+public AjaxResult suggest(@RequestParam String keyword) {
+  // 获取租户信息
+  Long tenantId = SecurityUtils.getLoginUser().getTenantId();
+  if (tenantId == null){
+    log.error("当前用户的公司ID为空！！");
+    return AjaxResult.error("当前用户的公司ID为空！！");
+  }
+  // 获取所有sku数据
+  List<ProductSkuVo> cacheList = productSkuCache.getAllProductSkuByTenant(tenantId);
+  if (cacheList == null){
+    log.error("当前用户没有sku数据！！");
+    return AjaxResult.error("当前用户没有sku数据！！");
+  }
+  // 筛选数据
+  if (StringUtils.isBlank(keyword)){
+    return AjaxResult.success(cacheList);
+  }
+  String lowerKeyword = keyword.toLowerCase();
+  List<ProductSkuVo> resultList = cacheList.stream()
+    .filter(sku -> sku.getSkuName().toLowerCase().contains(lowerKeyword)
+            || sku.getSkuCode().toLowerCase().equals(lowerKeyword))
+    .limit(20) // 控制结果数量，提升前端性能
+    .collect(Collectors.toList());
+  return AjaxResult.success(resultList);
+}
+```
+

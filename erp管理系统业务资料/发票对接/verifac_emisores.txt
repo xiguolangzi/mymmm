@@ -1,0 +1,88 @@
+ALTA DE EMISOR:
+
+URL: https://api.verifac.es:5244/v2/
+
+{
+	"cliente": {
+		"nif": "XXXXXXXXX",
+		"codigo": "XXXXXXXXXXXX"
+	},
+	"operacion": "alta_emisor",
+	"emisor": {
+		"nif": "XXXXXXXXX",
+		"nombre": "XXXXXXXXXXXXXXX",
+		"impuesto": "01",
+		"regimen": "01",
+		"calificacion": "S1",
+		"tipo_factura": "F2",
+		"descripcion": "FACTURA",
+		"iva": 21,
+		"serie_F1": "C",
+		"serie_F2": "S",
+		"serie_F3": "X",
+		"serie_R": "R",
+		"series_anuales": 0,
+		"limite_importe": 3000		
+	}
+}
+
+Notas:
+Campos obligatorios en bloque "emisor": nif y nombre
+Por defecto el resto de los campos se fijan a los valores del ejemplo
+
+
+CONSULTA DE EMISORES:
+
+Caso de consulta de todos los emisores del cliente:
+{
+	"cliente": {
+		"nif": "XXXXXXXXX",
+		"codigo": "XXXXXXXXXXXX"
+	},
+	"operacion": "consulta_emisor"
+}
+
+
+Caso de consulta de todos los emisores con un NIF:
+{
+	"cliente": {
+		"nif": "XXXXXXXXX",
+		"codigo": "XXXXXXXXXXXX"
+	},
+	"operacion": "consulta_emisor",
+	"emisor": {
+		"nif": "XXXXXXX"
+	}
+}
+
+
+Caso de consulta del emisor con un NIF y Código:
+{
+	"cliente": {
+		"nif": "XXXXXXXXX",
+		"codigo": "XXXXXXXXXXXX"
+	},
+	"operacion": "consulta_emisor",
+	"emisor": {
+		"nif": "XXXXXXX",
+		"codigo": "XXXXXXXXXXXXX"
+	}
+}
+
+
+BORRADO DE EMISOR:
+
+{
+	"cliente": {
+		"nif": "XXXXXXXXX",
+		"codigo": "XXXXXXXXXXXX"
+	},
+	"operacion": "borra_emisor",
+	"emisor": {
+		"nif": "XXXXXXX",
+		"codigo": "XXXXXXXXXXXXX"		
+	}
+}
+
+Nota:
+Sólo permitirá el borrado del emisor si no tiene facturas emitidas.
